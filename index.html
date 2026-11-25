@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dilarang Merokok di dalam Rumah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#FFB600;
+    --yellow-soft:#FFC93C;
+    --yellow-pale:#FFF1C7;
+    --brown:#3A200B;
+    --orange:#E5892B;
+    --cream:#FFF8E5;
+    --white:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Poppins',system-ui,sans-serif;color:var(--brown);background:var(--yellow);line-height:1.65;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{line-height:1.1}
+  .display{font-family:'Archivo Black',sans-serif;letter-spacing:.5px}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,182,0,.92);backdrop-filter:blur(8px)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600}
+  .brand-badge{width:40px;height:40px;border-radius:50%;background:var(--white);display:grid;place-items:center;position:relative}
+  .brand-badge svg{width:26px;height:26px}
+  nav ul{display:flex;gap:28px;list-style:none;font-size:14px;font-weight:500}
+  nav ul a{padding:6px 0;border-bottom:2px solid transparent;transition:border-color .2s}
+  nav ul a:hover,nav ul a.active{border-color:var(--white)}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;color:var(--brown)}
+  .menu-btn svg{width:28px;height:28px}
+
+  /* HERO */
+  .hero{position:relative;min-height:calc(100vh - 68px);display:flex;align-items:center;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center;width:100%;padding-top:32px;padding-bottom:56px}
+  .eyebrow{font-weight:300;font-size:clamp(28px,4vw,46px)}
+  .hero h1{font-family:'Archivo Black',sans-serif;font-size:clamp(46px,8vw,92px);margin:4px 0 20px;letter-spacing:1px}
+  .hero p{max-width:480px;font-size:16px;text-align:justify}
+  .cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;font-weight:600;font-size:14px;border:2px solid var(--brown);cursor:pointer;transition:transform .15s,background .2s,color .2s;font-family:inherit}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-dark{background:var(--brown);color:var(--yellow-soft)}
+  .btn-light{background:transparent;color:var(--brown)}
+  .btn-light:hover{background:var(--brown);color:var(--yellow-soft)}
+  .hero-art{position:relative;aspect-ratio:1/1;max-width:520px;width:100%;margin-left:auto}
+  .hero-art svg{width:100%;height:100%;overflow:visible}
+  .smoke path{fill:none;stroke:rgba(255,255,255,.55);stroke-width:14;stroke-linecap:round;animation:drift 6s ease-in-out infinite}
+  .smoke path:nth-child(2){animation-delay:-2s;stroke:rgba(255,255,255,.38);stroke-width:10}
+  .smoke path:nth-child(3){animation-delay:-4s;stroke:rgba(255,255,255,.3);stroke-width:8}
+  @keyframes drift{0%,100%{transform:translateX(0);opacity:.9}50%{transform:translateX(14px);opacity:.45}}
+  .ash circle{animation:fall 3.5s ease-in infinite}
+  .ash circle:nth-child(2n){animation-delay:-1.2s}
+  .ash circle:nth-child(3n){animation-delay:-2.3s}
+  @keyframes fall{0%{transform:translateY(-8px);opacity:0}20%{opacity:1}100%{transform:translateY(26px);opacity:0}}
+
+  /* STAT STRIP */
+  .strip{background:var(--brown);color:var(--yellow-pale)}
+  .strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-top:30px;padding-bottom:30px;text-align:center}
+  .strip b{display:block;font-family:'Archivo Black',sans-serif;font-size:clamp(30px,5vw,48px);color:var(--yellow)}
+  .strip span{font-size:14px}
+
+  /* SECTIONS */
+  section{padding:88px 0}
+  .sec-head{margin-bottom:40px;max-width:640px}
+  .tag{display:inline-block;background:var(--brown);color:var(--yellow-soft);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:999px;margin-bottom:14px}
+  h2{font-family:'Archivo Black',sans-serif;font-size:clamp(30px,5vw,48px)}
+  .sec-head p{margin-top:14px}
+  .light{background:var(--cream)}
+  .paler{background:var(--yellow-pale)}
+
+  .grid{display:grid;gap:20px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--white);border-radius:22px;padding:26px;box-shadow:0 6px 0 rgba(58,32,11,.12)}
+  .card h3{font-size:20px;margin-bottom:8px;font-weight:600}
+  .card p{font-size:15px}
+  .ico{width:52px;height:52px;border-radius:16px;background:var(--yellow);display:grid;place-items:center;margin-bottom:16px}
+  .ico svg{width:28px;height:28px}
+
+  /* Kandungan */
+  .zat{display:flex;gap:16px;align-items:flex-start;background:var(--white);border-radius:20px;padding:22px;box-shadow:0 6px 0 rgba(58,32,11,.12)}
+  .zat .num{flex:none;width:44px;height:44px;border-radius:50%;background:var(--brown);color:var(--yellow);display:grid;place-items:center;font-family:'Archivo Black';font-size:18px}
+  .zat h3{font-size:18px}
+  .zat p{font-size:14.5px}
+
+  /* Bahaya */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .callout{background:var(--brown);color:var(--yellow-pale);border-radius:28px;padding:34px}
+  .callout h3{color:var(--yellow);font-size:24px;margin-bottom:12px}
+  .pill{display:inline-block;background:var(--yellow);color:var(--brown);font-weight:600;font-size:13px;padding:4px 14px;border-radius:999px;margin:0 6px 6px 0}
+
+  /* Dampak */
+  .dampak .card{position:relative;overflow:hidden}
+  .dampak .card::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:var(--yellow-pale)}
+  .dampak .card>*{position:relative;z-index:1}
+  .dampak .card::after{z-index:0}
+
+  /* Upaya */
+  .steps{list-style:none;counter-reset:s;display:grid;gap:16px;max-width:820px}
+  .steps li{counter-increment:s;display:flex;gap:18px;align-items:center;background:var(--white);padding:18px 24px;border-radius:20px;box-shadow:0 6px 0 rgba(58,32,11,.12);font-weight:500}
+  .steps li::before{content:counter(s);flex:none;width:42px;height:42px;border-radius:50%;background:var(--orange);color:var(--white);display:grid;place-items:center;font-family:'Archivo Black'}
+
+  /* Info penyuluhan */
+  .info{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .info div{background:var(--white);border-radius:18px;padding:16px 20px}
+  .info small{display:block;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:600}
+  .info span{font-weight:500}
+
+  /* Tim */
+  .team .card{text-align:center;padding-top:34px}
+  .avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;font-family:'Archivo Black';font-size:34px;color:var(--yellow);background:var(--brown);border:5px solid var(--yellow)}
+  .team .card h3{font-size:18px}
+  .team .card p{color:var(--orange);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:1px}
+
+  /* Kuis */
+  .qa{max-width:820px;display:grid;gap:12px}
+  .qa details{background:var(--white);border-radius:18px;padding:0 22px;box-shadow:0 6px 0 rgba(58,32,11,.12)}
+  .qa summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:600;display:flex;justify-content:space-between;gap:16px;align-items:center}
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-size:20px;transition:transform .2s}
+  .qa details[open] summary::after{transform:rotate(45deg)}
+  .qa .ans{padding:0 0 20px;font-size:15px}
+  .qa ul{padding-left:20px}
+
+  /* Pledge */
+  .pledge{background:var(--brown);color:var(--yellow-pale);text-align:center}
+  .pledge h2{color:var(--yellow);margin-bottom:16px}
+  .pledge p{max-width:620px;margin:0 auto 26px}
+  .pledge .btn{border-color:var(--yellow);color:var(--yellow)}
+  .pledge .btn:hover{background:var(--yellow);color:var(--brown)}
+  .pledge .btn.done{background:var(--yellow);color:var(--brown)}
+  #count{margin-top:18px;font-size:14px;opacity:.85}
+
+  /* Footer */
+  footer{background:#2a1707;color:#d9c7a8;padding:44px 0 30px;font-size:14px}
+  footer .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:30px}
+  footer h4{color:var(--yellow);margin-bottom:10px;font-size:15px}
+  footer li{list-style:none;margin-bottom:6px}
+  footer .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:30px;padding-top:18px;font-size:13px;opacity:.8}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  .no-js .reveal{opacity:1;transform:none}
+
+  @media(max-width:900px){
+    .hero .wrap,.split{grid-template-columns:1fr}
+    .hero-art{max-width:380px;margin:0 auto}
+    .g4{grid-template-columns:repeat(2,1fr)}
+    .g3{grid-template-columns:1fr}
+    footer .cols{grid-template-columns:1fr}
+  }
+  @media(max-width:720px){
+    .menu-btn{display:block}
+    nav ul{position:absolute;top:68px;left:0;right:0;background:var(--yellow);flex-direction:column;gap:0;padding:8px 24px 18px;display:none;box-shadow:0 12px 20px rgba(0,0,0,.1)}
+    nav ul.open{display:flex}
+    nav ul li{padding:10px 0}
+    section{padding:64px 0}
+    .g2,.g4,.info{grid-template-columns:1fr}
+    .strip .wrap{grid-template-columns:1fr;gap:16px}
+    .hero p{text-align:left}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .smoke path,.ash circle{animation:none}
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#beranda" class="brand">
+        <span class="brand-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3A200B" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 18.4 18.4 5.6"/></svg>
+        </span>
+        Rumah Bebas Asap
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Buka menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <ul id="menu">
+        <li><a href="#beranda" class="active">Beranda</a></li>
+        <li><a href="#pengertian">Materi</a></li>
+        <li><a href="#bahaya">Bahaya</a></li>
+        <li><a href="#dampak">Dampak</a></li>
+        <li><a href="#upaya">Upaya</a></li>
+        <li><a href="#tim">Penyuluh</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<div class="hero" id="beranda">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Dilarang</div>
+      <h1>MEROKOK<br>di Rumah</h1>
+      <p>Asap rokok mengandung lebih dari 4.000 zat kimia, sekitar 70 di antaranya dapat memicu kanker. Di dalam rumah, asap itu terperangkap dan terhirup seluruh keluarga. Yuk, jadikan rumah kita bebas asap rokok.</p>
+      <div class="cta">
+        <a href="#pengertian" class="btn btn-dark">Pelajari materinya</a>
+        <a href="#tim" class="btn btn-light">Kenali penyuluh</a>
+      </div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 520 520">
+        <g class="smoke">
+          <path d="M250 330 C 200 270, 300 220, 240 150 S 290 40, 250 -10"/>
+          <path d="M300 340 C 360 280, 250 230, 330 160 S 300 60, 350 10"/>
+          <path d="M200 350 C 150 300, 230 250, 170 190"/>
+        </g>
+        <!-- puntung rokok 1 -->
+        <g transform="rotate(-24 260 380)">
+          <rect x="120" y="360" width="190" height="52" rx="8" fill="#F3F0E6"/>
+          <rect x="250" y="360" width="60" height="52" rx="8" fill="#E5892B"/>
+          <rect x="120" y="360" width="190" height="10" rx="5" fill="rgba(0,0,0,.06)"/>
+          <rect x="305" y="364" width="22" height="44" rx="6" fill="#7a3b12"/>
+          <rect x="316" y="368" width="14" height="36" rx="5" fill="#2e1606"/>
+        </g>
+        <!-- puntung rokok 2 -->
+        <g transform="rotate(8 280 440)">
+          <rect x="90" y="420" width="230" height="52" rx="8" fill="#F3F0E6"/>
+          <rect x="250" y="420" width="70" height="52" rx="8" fill="#E5892B"/>
+          <rect x="314" y="424" width="24" height="44" rx="6" fill="#7a3b12"/>
+          <rect x="326" y="428" width="16" height="36" rx="5" fill="#2e1606"/>
+        </g>
+        <g class="ash" fill="#3A200B">
+          <circle cx="360" cy="400" r="4"/><circle cx="380" cy="415" r="3"/><circle cx="345" cy="425" r="3.5"/>
+          <circle cx="395" cy="440" r="4"/><circle cx="370" cy="455" r="3"/><circle cx="420" cy="425" r="3"/>
+          <circle cx="355" cy="378" r="3"/><circle cx="405" cy="395" r="3.5"/>
+        </g>
+        <!-- tanda larangan -->
+        <g transform="translate(405 90)">
+          <circle r="62" fill="#fff" opacity=".92"/>
+          <circle r="62" fill="none" stroke="#C62828" stroke-width="12"/>
+          <path d="M-44 44 44 -44" stroke="#C62828" stroke-width="12" stroke-linecap="round"/>
+          <rect x="-34" y="-5" width="52" height="11" rx="3" fill="#3A200B"/>
+          <rect x="22" y="-5" width="10" height="11" rx="3" fill="#E5892B"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="wrap">
+    <div><b>4.000+</b><span>zat kimia dalam asap rokok</span></div>
+    <div><b>±70</b><span>jenis bersifat karsinogenik (pemicu kanker)</span></div>
+    <div><b>100%</b><span>anggota keluarga ikut terpapar jika merokok di dalam rumah</span></div>
+  </div>
+</div>
+
+<!-- PENGERTIAN & KANDUNGAN -->
+<section id="pengertian" class="light">
+  <div class="wrap">
+    <div class="split reveal" style="margin-bottom:64px">
+      <div>
+        <span class="tag">Materi 1</span>
+        <h2>Apa itu rokok dan asap rokok?</h2>
+      </div>
+      <div class="card">
+        <p>Rokok adalah hasil olahan tembakau yang dibakar dan asapnya dihisap, baik berupa rokok kretek, rokok putih, cerutu, maupun bentuk lainnya. Asap rokok mengandung lebih dari 4.000 zat kimia; sebagian besar beracun dan sekitar 70 jenis di antaranya bersifat karsinogenik, yaitu memicu kanker.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal">
+      <span class="tag">Materi 2</span>
+      <h2>Kandungan berbahaya dalam asap rokok</h2>
+    </div>
+    <div class="grid g2">
+      <div class="zat reveal"><div class="num">1</div><div><h3>Nikotin</h3><p>Menyebabkan kecanduan dan meningkatkan tekanan darah.</p></div></div>
+      <div class="zat reveal"><div class="num">2</div><div><h3>Tar</h3><p>Zat lengket penyebab kanker paru-paru.</p></div></div>
+      <div class="zat reveal"><div class="num">3</div><div><h3>Karbon monoksida (CO)</h3><p>Mengurangi kemampuan darah mengikat oksigen.</p></div></div>
+      <div class="zat reveal"><div class="num">4</div><div><h3>Zat beracun lain</h3><p>Seperti amonia, hidrogen sianida, dan formaldehid.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BAHAYA -->
+<section id="bahaya">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="tag">Materi 3</span>
+      <h2>Bahaya merokok di dalam rumah</h2>
+      <p style="margin-top:16px">Merokok di dalam rumah tidak hanya membahayakan perokok itu sendiri (<b>perokok aktif</b>), tetapi juga seluruh anggota keluarga yang menghirup asapnya (<b>perokok pasif</b>).</p>
+      <p style="margin-top:12px">Ruangan tertutup membuat asap rokok terperangkap, lalu menempel pada dinding, perabot, dan pakaian dalam waktu lama. Inilah yang disebut <i>thirdhand smoke</i>.</p>
+    </div>
+    <div class="callout reveal">
+      <h3>Racun tetap tinggal, meski rokok sudah dimatikan</h3>
+      <p style="margin-bottom:18px">Paparan zat beracun berlangsung terus-menerus karena sisa asap menempel di benda-benda sekitar kita.</p>
+      <span class="pill">Dinding</span><span class="pill">Perabot</span><span class="pill">Pakaian</span><span class="pill">Udara tertutup</span>
+    </div>
+  </div>
+</section>
+
+<!-- DAMPAK -->
+<section id="dampak" class="paler dampak">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">Materi 4</span>
+      <h2>Siapa yang paling terdampak?</h2>
+      <p>Asap rokok di rumah paling berbahaya bagi anggota keluarga yang rentan.</p>
+    </div>
+    <div class="grid g4">
+      <div class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#3A200B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg></div>
+        <h3>Anak-anak</h3>
+        <p>Meningkatkan risiko infeksi saluran pernapasan, asma, dan gangguan pertumbuhan paru-paru.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#3A200B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div>
+        <h3>Ibu hamil</h3>
+        <p>Meningkatkan risiko keguguran, bayi lahir prematur, dan berat badan lahir rendah.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#3A200B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></div>
+        <h3>Lansia</h3>
+        <p>Memperberat penyakit jantung, paru-paru, dan pembuluh darah yang sudah ada.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#3A200B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.5-5.5 6-5.5s6 2 6 5.5M15 15c3 0 6 1.5 6 5"/></svg></div>
+        <h3>Seluruh keluarga</h3>
+        <p>Berisiko iritasi mata, batuk, dan penurunan fungsi paru dalam jangka panjang.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPAYA -->
+<section id="upaya">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">Materi 5</span>
+      <h2>Cara mewujudkan rumah bebas asap rokok</h2>
+    </div>
+    <ol class="steps">
+      <li class="reveal">Menetapkan aturan tegas tidak merokok di dalam rumah.</li>
+      <li class="reveal">Menyediakan area khusus merokok di luar rumah, jauh dari jangkauan anak dan ibu hamil.</li>
+      <li class="reveal">Memberikan edukasi kepada anggota keluarga tentang bahaya asap rokok.</li>
+      <li class="reveal">Mendukung anggota keluarga yang merokok untuk berhenti, termasuk memanfaatkan layanan konseling berhenti merokok.</li>
+      <li class="reveal">Menempelkan tanda atau stiker "Kawasan Tanpa Rokok" di area rumah.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- PENYULUHAN & TIM -->
+<section id="tim" class="light">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">Penyuluhan</span>
+      <h2>Tim penyuluh</h2>
+      <p>Penyuluhan "Tidak Merokok di Dalam Rumah" disampaikan oleh empat orang penyuluh berikut.</p>
+    </div>
+    <div class="grid g4 team" style="margin-bottom:56px">
+      <div class="card reveal"><div class="avatar">T</div><h3>Tarisa Rafinta Putri</h3><p>Penyuluh</p></div>
+      <div class="card reveal"><div class="avatar">Z</div><h3>Zahwa Edya Putri</h3><p>Penyuluh</p></div>
+      <div class="card reveal"><div class="avatar">N</div><h3>Nadia Paradisya</h3><p>Penyuluh</p></div>
+      <div class="card reveal"><div class="avatar">R</div><h3>Reva Ocktavina</h3><p>Penyuluh</p></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2 style="font-size:clamp(24px,4vw,34px)">Detail kegiatan</h2>
+    </div>
+    <div class="info reveal">
+      <div><small>Pokok bahasan</small><span>Tidak Merokok di Dalam Rumah</span></div>
+      <div><small>Sasaran</small><span>Kepala keluarga dan anggota keluarga</span></div>
+      <div><small>Tempat</small><span>Ruang Kelas</span></div>
+      <div><small>Hari / tanggal / waktu</small><span>Menyusul</span></div>
+      <div><small>Metode</small><span>Ceramah, tanya jawab, diskusi</span></div>
+      <div><small>Media</small><span>Poster</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EVALUASI -->
+<section id="evaluasi" class="paler">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">Evaluasi</span>
+      <h2>Sudah paham? Coba jawab dulu</h2>
+      <p>Klik pertanyaan untuk melihat jawabannya.</p>
+    </div>
+    <div class="qa reveal">
+      <details>
+        <summary>1. Apa yang dimaksud dengan asap rokok?</summary>
+        <div class="ans">Asap hasil pembakaran tembakau yang mengandung lebih dari 4.000 zat kimia, sebagian besar beracun dan sekitar 70 jenis di antaranya dapat memicu kanker.</div>
+      </details>
+      <details>
+        <summary>2. Sebutkan dua bahaya merokok di dalam rumah!</summary>
+        <div class="ans"><ul><li>Membahayakan perokok aktif sekaligus perokok pasif, yaitu seluruh anggota keluarga yang menghirup asapnya.</li><li>Asap terperangkap dan menempel di dinding, perabot, serta pakaian (<i>thirdhand smoke</i>), sehingga paparan racun berlangsung terus-menerus.</li></ul></div>
+      </details>
+      <details>
+        <summary>3. Siapa saja yang paling rentan terkena dampak asap rokok di rumah?</summary>
+        <div class="ans">Anak-anak, ibu hamil, dan lansia.</div>
+      </details>
+      <details>
+        <summary>4. Apa upaya agar rumah bebas dari asap rokok?</summary>
+        <div class="ans">Menetapkan aturan tegas tidak merokok di dalam rumah, menyediakan area merokok di luar rumah, mengedukasi keluarga, mendukung anggota keluarga untuk berhenti merokok, dan memasang tanda "Kawasan Tanpa Rokok".</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- PLEDGE -->
+<section class="pledge">
+  <div class="wrap reveal">
+    <h2>Rumahku bebas asap rokok</h2>
+    <p>Mulai dari satu komitmen sederhana: tidak ada lagi asap rokok di dalam rumah, demi anak, ibu hamil, dan orang tua tercinta.</p>
+    <button class="btn" id="pledgeBtn" type="button">Saya berkomitmen</button>
+    <div id="count" aria-live="polite"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>SAP: Tidak Merokok di Dalam Rumah</h4>
+        <p>Media edukasi dari Satuan Acara Penyuluhan untuk menciptakan lingkungan rumah yang sehat dan bebas asap rokok.</p>
+      </div>
+      <div>
+        <h4>Penyuluh</h4>
+        <ul>
+          <li>Tarisa Rafinta Putri</li>
+          <li>Zahwa Edya Putri</li>
+          <li>Nadia Paradisya</li>
+          <li>Reva Ocktavina</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Daftar pustaka</h4>
+        <ul>
+          <li>Kemenkes RI. Pedoman PHBS di Rumah Tangga.</li>
+          <li>Kemenkes RI. Pedoman Kawasan Tanpa Rokok.</li>
+          <li>WHO. Tobacco and its Effects on Health.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 Tim Penyuluh. Dibuat untuk keperluan edukasi kesehatan.</div>
+  </div>
+</footer>
+
+<script>
+  // menu mobile
+  var btn=document.getElementById('menuBtn'), menu=document.getElementById('menu');
+  btn.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+  });
+  menu.addEventListener('click',function(e){ if(e.target.tagName==='A') menu.classList.remove('open'); });
+
+  // reveal saat scroll
+  var els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+    },{threshold:.12});
+    els.forEach(function(el){io.observe(el)});
+  } else { els.forEach(function(el){el.classList.add('in')}); }
+
+  // menu aktif
+  var links=document.querySelectorAll('nav ul a');
+  var secs=[].map.call(links,function(a){return document.querySelector(a.getAttribute('href'))});
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY+120, cur=0;
+    secs.forEach(function(s,i){ if(s && s.offsetTop<=y) cur=i; });
+    links.forEach(function(a,i){ a.classList.toggle('active',i===cur); });
+  },{passive:true});
+
+  // komitmen (disimpan ringan di browser pengunjung)
+  var pb=document.getElementById('pledgeBtn'), ct=document.getElementById('count');
+  function setDone(){ pb.classList.add('done'); pb.textContent='Terima kasih, komitmenmu tercatat'; ct.textContent='Semoga rumahmu selalu sehat dan bebas asap rokok.'; }
+  try{ if(localStorage.getItem('pledge-rumah-bebas-asap')==='1') setDone(); }catch(e){}
+  pb.addEventListener('click',function(){
+    setDone();
+    try{ localStorage.setItem('pledge-rumah-bebas-asap','1'); }catch(e){}
+  });
+</script>
+</body>
+</html>
